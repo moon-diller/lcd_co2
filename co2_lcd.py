@@ -122,10 +122,31 @@ class TextLabel(RectWidget):
         self.text = text
         self._font_color = font_color
     
+
+    @staticmethod
+    def _get_text_font_size(text, image_size):
+        '''Returns font size based on image size and lines number'''
+        font_size = max(8, image_size[1] // (text.count("\n") + 1) - 2)
+        return font_size
+
+    @staticmethod
+    def _get_text_x_offset(text, image_size, x0, font_size):
+        '''Returns text X offset for center alignment'''
+        text_lines = text.split('\n')
+        letter_width_by_font_size = 0.6
+        text_width = letter_width_by_font_size * font_size * max([len(l) for l in text_lines])
+        text_offset_x = x0 + image_size[0] // 2 - text_width // 2
+
+        return text_offset_x
+
     def draw(self):
         image_size = (self.x1 - self.x0, self.y1 - self.y0)
-        text_size = max(8, image_size[1] // (self.text.strip().count('\n') + 1) - 2)
-        self._lcd.draw_text(self.text, text_size, image_size, (self.x0, self.y0), self._font_color, self.color)
+
+        font_size = TextLabel._get_text_font_size(self.text, image_size)
+        text_offset_x = TextLabel._get_text_x_offset(self.text, image_size, self.x0, font_size)
+        text_offset = (text_offset_x, 0)  
+
+        self._lcd.draw_text(self.text, font_size, image_size, (self.x0, self.y0), text_offset, self._font_color, self.color)
         self.need_redraw = False
     
     @property
@@ -139,7 +160,7 @@ class TextLabel(RectWidget):
         self.need_redraw = True
 
 
-class CO2Widget(RectWidget):
+class CO2Widget(TextLabel):
     def __init__(
     self,
     lcd: LcdDisplay,
@@ -152,8 +173,7 @@ class CO2Widget(RectWidget):
     bg_color: int,
     co2meter: CO2Meter
     ):
-        super().__init__(lcd, parent, relx, rely, width, height, bg_color)
-        self.text = ""
+        super().__init__(lcd, parent, relx, rely, width, height, font_color, bg_color)
         self._font_color = font_color
         self._co2meter = co2meter
 
@@ -186,20 +206,13 @@ class CO2Widget(RectWidget):
 
         self.text = f"eCO2={self._eco2} ppm,\nTVOC={self._tvoc} ppb"
         image_size = (self.x1 - self.x0, self.y1 - self.y0)
-        text_size = max(8, image_size[1] // (self.text.strip().count('\n') + 1) - 2)
-        self._lcd.draw_text(self.text, text_size, image_size, (self.x0, self.y0), self._font_color, self.color)
+
+        font_size = TextLabel._get_text_font_size(self.text, image_size)
+        text_offset_x = TextLabel._get_text_x_offset(self.text, image_size, self.x0, font_size)
+        text_offset = (text_offset_x, 0)  
+
+        self._lcd.draw_text(self.text, font_size, image_size, (self.x0, self.y0), text_offset, self._font_color, self.color)
     
-    @property
-    def text(self) -> str:
-        """Return current text"""
-        return self._text
-
-    @text.setter
-    def text(self, value):
-        self._text = value
-        self.need_redraw = True
-
-
 
 if __name__ == "__main__":
     
