@@ -1,0 +1,6 @@
+[submodule "st7735lcd"]
+	path = st7735lcd
+	url = git@github.com:moon-diller/st7735lcd.git
+[submodule "ccs811co2"]
+	path = ccs811co2
+	url = git@github.com:moon-diller/ccs811co2.git
