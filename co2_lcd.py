@@ -265,4 +265,3 @@ if __name__ == "__main__":
             print("i2c bus closed...")
         GPIO.cleanup()
         spi_dev.close()
-        GPIO.cleanup()
