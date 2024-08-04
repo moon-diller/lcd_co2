@@ -28,5 +28,3 @@ Enable RPi SPI and I2C interfaces.
 `sudo pigpiod`
 
 `python3 co2_lcd.py`
-
-## License
