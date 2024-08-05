@@ -20,7 +20,13 @@ This project uses import RPi.GPIO, pigpio and spidev packages. Also it includes 
 This project does not rely on Micropython or Adafruit CircuitPython.
 
 ## Installation
-`git clone --recurse-submodules git@github.com:moon-diller/lcd_co2.git`
+`git clone https://github.com/moon-diller/lcd_co2.git`
+
+`cd lcd_co2`
+
+`sed  's/git@github.com:/https:\/\/github\.com\//g' -i .gitmodules`
+
+`git submodule update --init`
 
 ## Usage
 Enable RPi SPI and I2C interfaces.
