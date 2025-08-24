@@ -40,6 +40,29 @@ This project does not rely on Micropython or Adafruit CircuitPython.
 
 `git submodule update --init`
 
+## 🔌 Wiring
+
+### LCD → Raspberry Pi
+| Display Module  | RPi BCM Pin     |
+|-----------------|-----------------|
+| VCC             | 3.3V            |
+| GND             | GND             |
+| CS              | GPIO 8 - CE0    |
+| RESET           | GPIO 24         |
+| A0              | GPIO 25         |
+| SDA             | GPIO 10         |
+| SCK             | GPIO 11 - SCLK  |
+| LED             | 3.3 V           |
+
+### Raspberry Pi - CCS811 
+|  RPi BCM Pin  | CCS811 Pin |
+|---------------|------------|
+| 3.3V          | VCC        |
+| GPIO 2 (SDA)  | SDA        |
+| GPIO 3 (SCL)  | SCL        |
+| GND           | GND        |
+| GND           | WAK        |
+
 ## Usage
 Enable RPi SPI and I2C interfaces.
 
