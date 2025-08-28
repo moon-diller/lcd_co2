@@ -42,7 +42,7 @@ This project does not rely on Micropython or Adafruit CircuitPython.
 
 ## 🔌 Wiring
 
-### LCD → Raspberry Pi
+### LCD - Raspberry Pi
 | Display Module  | RPi BCM Pin     |
 |-----------------|-----------------|
 | VCC             | 3.3V            |
@@ -62,6 +62,8 @@ This project does not rely on Micropython or Adafruit CircuitPython.
 | GPIO 3 (SCL)  | SCL        |
 | GND           | GND        |
 | GND           | WAK        |
+
+Also GPIO 26 pin controls status led, but it is optional and does not affect the interaction between devices.
 
 ## Usage
 Enable RPi SPI and I2C interfaces.
